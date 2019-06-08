@@ -1,4 +1,4 @@
-package com.siteminder.emailservice.util;
+package com.siteminder.emailservice.email.provider;
 
 
 import com.siteminder.emailservice.email.InvalidSendEmailRequestException;
@@ -7,7 +7,7 @@ import com.siteminder.emailservice.email.SendEmailRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmailValidator
+public class SendEmailRequestValidator
 {
     public static void validate(SendEmailRequest request)
     {

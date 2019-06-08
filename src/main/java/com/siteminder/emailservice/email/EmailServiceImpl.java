@@ -3,7 +3,7 @@ package com.siteminder.emailservice.email;
 import com.siteminder.emailservice.email.provider.EmailProvider;
 import com.siteminder.emailservice.email.provider.EmailProviderSendRequest;
 import com.siteminder.emailservice.email.provider.EmailServiceUnavailableException;
-import com.siteminder.emailservice.util.EmailValidator;
+import com.siteminder.emailservice.email.provider.SendEmailRequestValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class EmailServiceImpl implements EmailService
     @Override
     public SendEmailResponse sendEmail(SendEmailRequest request)
     {
-        EmailValidator.validate(request);
+        SendEmailRequestValidator.validate(request);
         EmailProviderSendRequest sendRequest = getEmailSendRequest(request);
 
         try
