@@ -33,7 +33,10 @@ public class EmailServiceImpl implements EmailService
         try
         {
             logger.info("Received new email send request. Attempting delivery via provider SendGrid");
-            mailGun.send(sendRequest);
+            sendGrid.send(sendRequest);
+
+            // Todo: add response
+            return null;
         }
         catch (EmailServiceUnavailableException e)
         {
@@ -44,6 +47,8 @@ public class EmailServiceImpl implements EmailService
         {
             logger.info("Reattempting delivery via provider SendGrid");
             mailGun.send(null);
+            // Todo: add response
+            return null;
         }
         catch (EmailServiceUnavailableException e)
         {
@@ -58,6 +63,8 @@ public class EmailServiceImpl implements EmailService
         EmailProviderSendRequest sendRequest = new EmailProviderSendRequest(request.getFrom(), request.getTo());
         sendRequest.setSubject(request.getSubject());
         sendRequest.setBody(request.getBody());
+        sendRequest.setCcs(request.getCcs());
+        sendRequest.setBcs(request.getBcs());
 
         return sendRequest;
     }

@@ -74,8 +74,8 @@ public class EmailProviderSendRequest
         return bbcs;
     }
 
-    public void setBbcs(List<String> bbcs)
+    public void setBcs(List<String> bcs)
     {
-        this.bbcs = bbcs;
+        this.bbcs = bcs;
     }
 }

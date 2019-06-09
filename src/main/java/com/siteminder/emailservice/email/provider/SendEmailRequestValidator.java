@@ -11,11 +11,11 @@ public class SendEmailRequestValidator
 {
     public static void validate(SendEmailRequest request)
     {
-        if (request.getFrom() == null || request.getFrom().isEmpty())
-            throw new InvalidSendEmailRequestException("Empty or null value for from field is illegal");
+        if (request.getFrom().isEmpty())
+            throw new InvalidSendEmailRequestException("From field is a required argument");
 
         else if (request.getTo().isEmpty())
-            throw new InvalidSendEmailRequestException("Empty values for to field is illegal");
+            throw new InvalidSendEmailRequestException("To fields are required arguments");
 
         // Validate the format of each individual email IDs
         List<String> emails = new ArrayList<>();

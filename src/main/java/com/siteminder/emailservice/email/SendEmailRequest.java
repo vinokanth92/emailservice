@@ -1,5 +1,6 @@
 package com.siteminder.emailservice.email;
 
+import java.util.Collections;
 import java.util.List;
 
 public class SendEmailRequest
@@ -9,7 +10,18 @@ public class SendEmailRequest
     private String subject;
     private String body;
     private List<String> ccs;
-    private List<String> bccs;
+    private List<String> bcs;
+
+    public SendEmailRequest()
+    {
+        from = "";
+        subject = "";
+        body = "";
+
+        to = Collections.emptyList();
+        ccs = Collections.emptyList();
+        bcs = Collections.emptyList();
+    }
 
     public String getFrom()
     {
@@ -63,11 +75,11 @@ public class SendEmailRequest
 
     public List<String> getBcs()
     {
-        return bccs;
+        return bcs;
     }
 
-    public void setBccs(List<String> bccs)
+    public void setBcs(List<String> bcs)
     {
-        this.bccs = bccs;
+        this.bcs = bcs;
     }
 }
