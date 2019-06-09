@@ -1,9 +1,6 @@
 package com.siteminder.emailservice.email;
 
-import com.siteminder.emailservice.email.provider.EmailProvider;
-import com.siteminder.emailservice.email.provider.EmailProviderSendRequest;
-import com.siteminder.emailservice.email.provider.EmailServiceUnavailableException;
-import com.siteminder.emailservice.email.provider.SendEmailRequestValidator;
+import com.siteminder.emailservice.email.provider.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,30 +29,28 @@ public class EmailServiceImpl implements EmailService
 
         try
         {
-            logger.info("Received new email send request. Attempting delivery via provider SendGrid");
+            logger.info("Received new email send request and generated internal ID: " + sendRequest.getId() + ". Attempting delivery via provider SendGrid");
             sendGrid.send(sendRequest);
 
-            // Todo: add response
-            return null;
+            return new SendEmailResponse("Queued", sendRequest.getId());
         }
         catch (EmailServiceUnavailableException e)
         {
-            logger.error("Email deliver via SendGrid failed. Failing over to MailGun");
+            logger.error("Email deliver via SendGrid failed for request with ID: " + sendRequest.getId() + " . Failing over to MailGun");
         }
 
         try
         {
-            logger.info("Reattempting delivery via provider SendGrid");
-            mailGun.send(null);
-            // Todo: add response
-            return null;
+            logger.info("Reattempting delivery via provider Mail Gun for request with ID: " + sendRequest.getId());
+            mailGun.send(sendRequest);
+
+            return new SendEmailResponse("Queued", sendRequest.getId());
         }
         catch (EmailServiceUnavailableException e)
         {
-            logger.error("Email delivery via MailGun failed. Failing over to MailGun");
+            logger.error("Email delivery via MailGun failed for request with ID: " + sendRequest.getId());
+            throw new InternalServiceFailureException("Email delivery for request with ID: " + sendRequest.getId() + " failed with all possible providers.");
         }
-
-        return null;
     }
 
     private EmailProviderSendRequest getEmailSendRequest(SendEmailRequest request)

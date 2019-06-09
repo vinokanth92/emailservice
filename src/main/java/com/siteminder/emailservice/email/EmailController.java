@@ -22,7 +22,7 @@ public class EmailController
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
     @ResponseBody
     public SendEmailResponse sendEmail(@RequestBody SendEmailRequest request)
     {

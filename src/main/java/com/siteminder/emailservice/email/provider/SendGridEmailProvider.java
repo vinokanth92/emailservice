@@ -7,6 +7,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.body.RequestBodyEntity;
+import com.siteminder.emailservice.email.SendEmailResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -37,10 +38,12 @@ public class SendGridEmailProvider implements EmailProvider
                                             .body(getRequestBody(request));
 
             HttpResponse<JsonNode> response = body.asJson();
+            EmailProviderStatusCodeResolver.resolve(response);
         }
         catch (UnirestException e)
         {
-
+            logger.error("Email delivery failed. Failed to post request to SendGrid service. Error: " + e);
+            throw new InternalServiceFailureException(e);
         }
     }
 
@@ -69,9 +72,14 @@ public class SendGridEmailProvider implements EmailProvider
     {
         JsonArray personalizationArray = new JsonArray();
         JsonObject personalizationItem = new JsonObject();
+
         personalizationItem.add("to", getEmailArray(request.getTo()));
-        personalizationItem.add("cc", getEmailArray(request.getCcs()));
-        personalizationItem.add("bcc", getEmailArray(request.getBcs()));
+
+        if (!request.getCcs().isEmpty())
+            personalizationItem.add("cc", getEmailArray(request.getCcs()));
+
+        if (!request.getBcs().isEmpty())
+            personalizationItem.add("bcc", getEmailArray(request.getBcs()));
 
         personalizationArray.add(personalizationItem);
         return personalizationArray;

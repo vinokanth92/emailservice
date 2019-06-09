@@ -3,7 +3,7 @@ package com.siteminder.emailservice.email;
 import java.util.Collections;
 import java.util.List;
 
-public class SendEmailRequest
+public final class SendEmailRequest
 {
     private String from;
     private List<String> to;

@@ -5,6 +5,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.HttpRequestWithBody;
+import com.siteminder.emailservice.email.SendEmailResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,37 +35,22 @@ public class MailGunEmailProvider implements EmailProvider
         {
             logger.info("Attempting email deliver via MailGun");
             HttpRequestWithBody httpRequest = Unirest.post(BASE_URL + domain + "/messages")
-                                         .basicAuth("api", apiKey)
-                                         .queryString("subject", request.getSubject())
-                                         .queryString("text", request.getBody());
+                                                     .basicAuth("api", apiKey)
+                                                     .queryString("from", request.getFrom())
+                                                     .queryString("subject", request.getSubject())
+                                                     .queryString("text", request.getBody());
 
             appendRecipients(httpRequest, request.getTo());
             appendCcs(httpRequest, request.getCcs());
             appendBcs(httpRequest, request.getBcs());
 
             HttpResponse<JsonNode> response = httpRequest.asJson();
-
-            // Todo add email ID to log message
-            if (response.getStatus() == 200)
-                logger.info("Received ACK for email delivery");
-
-            else if (response.getStatus() >= 400 && response.getStatus() < 500)
-            {
-                // Status codes of 4xx denotes client error
-                // Since these error's cannot be recovered throw internal service failure exception
-                logger.error("Email delivery failed due to client error. Status code: " + response.getStatus());
-                throw new InternalServiceFailureException();
-            }
-            else if (response.getStatus() >= 500)
-            {
-                logger.error("Email delivery failed due to MailGun server error. Status code: " + response.getStatus());
-                throw new EmailServiceUnavailableException();
-            }
+            EmailProviderStatusCodeResolver.resolve(response);
         }
         catch (UnirestException e)
         {
             logger.error("Email delivery failed. Failed to post request to MailGun service. Error: " + e);
-            throw new InternalServiceFailureException();
+            throw new InternalServiceFailureException(e);
         }
     }
 
@@ -85,5 +71,4 @@ public class MailGunEmailProvider implements EmailProvider
         for (String bcc : bccs)
             request.queryString("bcc", bcc);
     }
-
 }
