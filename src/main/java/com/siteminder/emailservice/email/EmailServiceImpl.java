@@ -36,7 +36,7 @@ public class EmailServiceImpl implements EmailService
         }
         catch (EmailServiceUnavailableException e)
         {
-            logger.error("Email deliver via SendGrid failed for request with ID: " + sendRequest.getId() + " . Failing over to MailGun");
+            logger.error("Email deliver via SendGrid failed for request with ID: " + sendRequest.getId() + ". Failing over to MailGun");
         }
 
         try

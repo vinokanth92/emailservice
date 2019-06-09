@@ -49,7 +49,7 @@ public class MailGunEmailProvider implements EmailProvider
         }
         catch (UnirestException e)
         {
-            logger.error("Email delivery failed. Failed to post request to MailGun service. Error: " + e);
+            logger.error("Email delivery failed for request with ID: " + request.getId() + ". Failed to post request to MailGun service. Error: " + e);
             throw new InternalServiceFailureException(e);
         }
     }

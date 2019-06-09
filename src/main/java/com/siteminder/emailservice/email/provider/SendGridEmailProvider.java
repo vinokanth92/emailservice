@@ -7,7 +7,6 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.body.RequestBodyEntity;
-import com.siteminder.emailservice.email.SendEmailResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,7 +41,7 @@ public class SendGridEmailProvider implements EmailProvider
         }
         catch (UnirestException e)
         {
-            logger.error("Email delivery failed. Failed to post request to SendGrid service. Error: " + e);
+            logger.error("Email delivery failed for request with ID: " + request.getId() + ". Failed to post request to SendGrid service. Error: " + e);
             throw new InternalServiceFailureException(e);
         }
     }

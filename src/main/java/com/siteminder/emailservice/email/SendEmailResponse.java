@@ -1,6 +1,5 @@
 package com.siteminder.emailservice.email;
 
-import org.springframework.http.HttpStatus;
 
 public final class SendEmailResponse
 {

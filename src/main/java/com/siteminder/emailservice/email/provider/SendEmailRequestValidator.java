@@ -12,10 +12,10 @@ public class SendEmailRequestValidator
     public static void validate(SendEmailRequest request)
     {
         if (request.getFrom().isEmpty())
-            throw new InvalidSendEmailRequestException("From field is a required argument");
+            throw new InvalidSendEmailRequestException("Required argument 'from' is not supplied. Please supply sender as a string of valid email ID.");
 
         else if (request.getTo().isEmpty())
-            throw new InvalidSendEmailRequestException("To fields are required arguments");
+            throw new InvalidSendEmailRequestException("Required argument 'to' is not supplied. Please supply recipients as an array of valid email IDs.");
 
         // Validate the format of each individual email IDs
         List<String> emails = new ArrayList<>();
