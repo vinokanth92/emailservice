@@ -26,14 +26,14 @@ The objective of this service is to expose an API to send out emails. The API su
   `None`
 
 - Request Body
-    ```json
+    ```
     {
-        "from": "STRING [REQUIRED]",
-        "to": "ARRAY OF STRINGS [REQUIRED]",
-        "subject": "STRING [OPTIONAL]",
-        "body": "STRING [OPTIONAL]",
-        "ccs": "ARRAY OF STRINGS [OPTIONAL]",
-        "bccs": "ARRAY OF STRINGS [OPTIONAL]"
+        "from": STRING [REQUIRED],
+        "to": ARRAY OF STRINGS [REQUIRED],
+        "subject": STRING [OPTIONAL],
+        "body": STRING [OPTIONAL],
+        "ccs": ARRAY OF STRINGS [OPTIONAL],
+        "bccs": ARRAY OF STRINGS [OPTIONAL]
     }
     ```
 
@@ -42,10 +42,10 @@ The objective of this service is to expose an API to send out emails. The API su
       This resposne means the request is valid, accepted and currently queued. The request will be process asynchronously. Currently there is no API available to check the status of an accepted request.
       `Status code: 201 ACCEPTED`
       `Response`
-      ```json
+      ```
       {
-          "status": "STRING",
-          "requestId": "STRING"
+          "status": STRING,
+          "requestId": STRING
       }
       ```
 
@@ -64,10 +64,10 @@ The objective of this service is to expose an API to send out emails. The API su
 
         `Status code: 500 INTERNAL SERVER ERROR`
         `Response`
-        ```json
+        ```
         {
-            "statusCode": "INTEGER",
-            "errorMessage": "STRING"
+            "statusCode": INTEGER,
+            "errorMessage": STRING
         }
         ```
       Reasons:
