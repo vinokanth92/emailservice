@@ -1,13 +1,11 @@
 package com.siteminder.emailservice.common;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.siteminder.emailservice.email.InvalidSendEmailRequestException;
 import com.siteminder.emailservice.email.provider.InternalServiceFailureException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,7 +41,7 @@ public class GlobalExceptionHandler
 
     @SuppressWarnings("unused")
     @ExceptionHandler(value = {InternalServiceFailureException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public ApiErrorResponse requestParseError(InternalServiceFailureException ex)
     {
