@@ -71,7 +71,7 @@ The objective of this service is to expose an API to send out emails. The API su
       }
       ```
       Reasons:
-          - Email service is unavailable to due to internal server error (Both SendGrid and MailGun are down)
+      - Email service is unavailable to due to internal server error (Both SendGrid and MailGun are down)
 
 ### 3. Deployment
 
@@ -100,11 +100,9 @@ The objective of this service is to expose an API to send out emails. The API su
 ### 4. Demo
 The application is currently deployed in an AWS BeanStalk environment. The application can be accessed via `emailservice-env.xb3bpqkjp8.ap-southeast-2.elasticbeanstalk.com` Please refer to the API Documentation section for more information. 
 
-The repository also contains a Postman Collection when can be readily used via Postman to test the API. The collection and environment file can be found in `PROJECT_ROOT_DIR/postman`
+- The repository also contains a Postman Collection when can be readily used via Postman to test the API. The collection and environment file can be found in `PROJECT_ROOT_DIR/postman` Use `domain-aws` as value in the Postman URL placeholder in order to initiate requests to the AWS deployed application.
 
-Please use `domain-aws` as value in the Postman URL placeholder in order to initiate requests to the AWS deployed application.
-
-Perform a POST request on http://emailservice-env.xb3bpqkjp8.ap-southeast-2.elasticbeanstalk.com/emails with a valid request body.
+- Alternatively, perform a POST request on http://emailservice-env.xb3bpqkjp8.ap-southeast-2.elasticbeanstalk.com/emails with a valid request body.
 
 ### 5. Limitations
 - The number of max number of recipients per request are constrained by the email provider services SendGrid and MailGun used in the application.
