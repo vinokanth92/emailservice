@@ -33,14 +33,14 @@ The objective of this service is to expose an API to send out emails. The API su
         "subject": STRING [OPTIONAL],
         "body": STRING [OPTIONAL],
         "ccs": ARRAY OF STRINGS [OPTIONAL],
-        "bccs": ARRAY OF STRINGS [OPTIONAL]
+        "bcs": ARRAY OF STRINGS [OPTIONAL]
     }
     ```
 
 - Response
     - Success Response
       This resposne means the request is valid, accepted and currently queued. The request will be process asynchronously. Currently there is no API available to check the status of an accepted request.
-      `Status code: 201 ACCEPTED`
+      `Status code: 202 ACCEPTED`
       Response
       ```
       {

@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "48094422-a17a-4c2a-a774-a127be6d645a",
+		"name": "Email Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Send Email",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"from\": \"test-from@test.com\",\n\t\"to\": [\n\t\t\"test-to-1@test.com\",\n\t\t\"test-to-2@test.com\",\n\t\t\"test-to-3@test.com\"\t\t\n\t\t],\n\t\"subject\": \"Test - Email Service\",\n\t\"body\": \"This is a test email\",\n\t\"ccs\": [\n\t\t\"test-cc-1@test.com\",\n\t\t\"test-cc-2@test.com\",\n\t\t\"test-cc-3@test.com\"\n\t\t],\n\t\"bccs\": [\n\t\t\"test-bcc-1@test.com\",\n\t\t\"test-bcc-2@test.com\",\n\t\t\"test-bcc-3@test.com\"\t\n\t\t]\n}"
+				},
+				"url": {
+					"raw": "http://{{domain}}/v1/emails",
+					"protocol": "http",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"v1",
+						"emails"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
