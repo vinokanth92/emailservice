@@ -16,13 +16,13 @@ The objective of this service is to expose an API to send out emails. The API su
 ### 2. API Documentation
 
 ##### Send Email API
-- URL
+- URL <br>
   `/emails`
 
-- Method
+- Method <br>
   `POST`
 
-- URL Parameters
+- URL Parameters <br>
   `None`
 
 - Request Body
@@ -38,9 +38,8 @@ The objective of this service is to expose an API to send out emails. The API su
     ```
 
 - Response
-    - Success Response
-      This resposne means the request is valid, accepted and currently queued. Given the provided email IDs are real, the request will be processed asynchronously.
-      Currently there is no API available to check the status of an accepted request.
+    - Success Response <br>
+      This resposne means the request is valid, accepted and currently queued. The request will be process asynchronously. Currently there is no API available to check the status of an accepted request.
       `Status code: 202 ACCEPTED`
       Response
       ```
@@ -63,16 +62,16 @@ The objective of this service is to expose an API to send out emails. The API su
       - If the request does not match the request body schema
       - If the request contains invalid email IDs
 
-        `Status code: 500 INTERNAL SERVER ERROR`
-        `Response`
-        ```
-        {
-            "statusCode": INTEGER,
-            "errorMessage": STRING
-        }
-        ```
+      `Status code: 500 INTERNAL SERVER ERROR`
+      `Response`
+      ```
+      {
+          "statusCode": INTEGER,
+          "errorMessage": STRING
+      }
+      ```
       Reasons:
-        - Email service is unavailable to due to internal server error (Both SendGrid and MailGun are down)
+          - Email service is unavailable to due to internal server error (Both SendGrid and MailGun are down)
 
 ### 3. Deployment
 
@@ -99,9 +98,13 @@ The objective of this service is to expose an API to send out emails. The API su
    `java -jar build/libs/emailservice-0.0.1-SNAPSHOT.jar`
 
 ### 4. Demo
-The application is currently deployed in an AWS BeanStalk environment. The application can be accessed via <URL>. Please refer to the API Documentation section for more information. 
+The application is currently deployed in an AWS BeanStalk environment. The application can be accessed via `emailservice-env.xb3bpqkjp8.ap-southeast-2.elasticbeanstalk.com` Please refer to the API Documentation section for more information. 
 
-*The repository also contains a Postman Collection when can be readily used via Postman to test the API.*
+The repository also contains a Postman Collection when can be readily used via Postman to test the API. The collection and environment file can be found in `PROJECT_ROOT_DIR/postman`
+
+Please use `domain-aws` as value in the Postman URL placeholder in order to initiate requests to the AWS deployed application.
+
+Perform a POST request on http://emailservice-env.xb3bpqkjp8.ap-southeast-2.elasticbeanstalk.com/emails with a valid request body.
 
 ### 5. Limitations
 - The number of max number of recipients per request are constrained by the email provider services SendGrid and MailGun used in the application.
