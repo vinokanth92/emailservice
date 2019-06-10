@@ -16,6 +16,8 @@ The objective of this service is to expose an API to send out emails. The API su
 ### 2. API Documentation
 
 ##### Send Email API
+Sends email to given list of `to`, `cc` and `bcc` email IDs from the `from` email ID. Email `subject` and `body` are optional parameters. Since email specification allows messages to be sent without the said fields.
+
 - URL <br>
   `/emails`
 
