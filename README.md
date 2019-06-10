@@ -52,10 +52,10 @@ The objective of this service is to expose an API to send out emails. The API su
     - Error Response  
       `Status code: 400 BAD REQUEST`
       `Response`
-      ```json
+      ```
       {
-          "statusCode": "INTEGER",
-          "errorMessage": "STRING"
+          "statusCode": INTEGER,
+          "errorMessage": STRING
       }
       ```
       Reasons:
