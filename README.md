@@ -84,7 +84,7 @@ Sends email to given list of `to`, `cc` and `bcc` email IDs from the `from` emai
 
 ##### 3.2 Instructions
 1. Checkout repository
-   `git checkout <REPOSITORY_URL> .`
+   `git clone <REPOSITORY_URL> .`
 
 2. Navigate to the project location and build the project
    `cd PROJECT_ROOT_DIR`
