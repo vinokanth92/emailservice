@@ -28,12 +28,12 @@ The objective of this service is to expose an API to send out emails. The API su
 - Request Body
     ```json
     {
-        "from": STRING [REQUIRED],
-        "to": ARRAY OF STRINGS [REQUIRED],
-        "subject": STRING [OPTIONAL],
-        "body": STRING [OPTIONAL],
-        "ccs": ARRAY OF STRINGS [OPTIONAL],
-        "bccs": ARRAY OF STRINGS [OPTIONAL]
+        "from": "STRING [REQUIRED]",
+        "to": "ARRAY OF STRINGS [REQUIRED]",
+        "subject": "STRING [OPTIONAL]",
+        "body": "STRING [OPTIONAL]",
+        "ccs": "ARRAY OF STRINGS [OPTIONAL]",
+        "bccs": "ARRAY OF STRINGS [OPTIONAL]"
     }
     ```
 
@@ -44,8 +44,8 @@ The objective of this service is to expose an API to send out emails. The API su
       `Response`
       ```json
       {
-          "status": STRING,
-          "requestId": STRING
+          "status": "STRING",
+          "requestId": "STRING"
       }
       ```
 
@@ -54,8 +54,8 @@ The objective of this service is to expose an API to send out emails. The API su
       `Response`
       ```json
       {
-          "statusCode": INTEGER,
-          "errorMessage": STRING
+          "statusCode": "INTEGER",
+          "errorMessage": "STRING"
       }
       ```
       Reasons:
@@ -66,8 +66,8 @@ The objective of this service is to expose an API to send out emails. The API su
         `Response`
         ```json
         {
-            "statusCode": INTEGER,
-            "errorMessage": STRING
+            "statusCode": "INTEGER",
+            "errorMessage": "STRING"
         }
         ```
       Reasons:
