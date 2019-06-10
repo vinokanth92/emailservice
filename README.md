@@ -11,7 +11,8 @@
    
 
 ### 1. Overview
-The objective of this service is to expose an API to send out emails. The API supports multiple recipients, cc and bcc email IDs. In the backend, the email service utilizes SendGrid and MailGun email services to fullfil the request. The service is designed such a way that if any of the aformentioned services failed, automatic failover to the available one will be performed.
+The objective of this service is to expose an API to send out emails. The API supports multiple recipients, cc and bcc email IDs. In the backend, the email service utilizes SendGrid and MailGun email services to fullfil the request.
+If any of the aformentioned email fulfilment services failed, automatic failover to the available one will be perfomed.
 
 ### 2. API Documentation
 
@@ -41,7 +42,7 @@ Sends email to given list of `to`, `cc` and `bcc` email IDs from the `from` emai
 
 - Response
     - Success Response <br>
-      This resposne means the request is valid, accepted and currently queued. The request will be process asynchronously. Currently there is no API available to check the status of an accepted request.
+      This resposne means the request is valid, accepted and currently queued. The request will be processed asynchronously. Currently there is no API available to check the status of an accepted request.
       `Status code: 202 ACCEPTED`
       Response
       ```
@@ -73,7 +74,7 @@ Sends email to given list of `to`, `cc` and `bcc` email IDs from the `from` emai
       }
       ```
       Reasons:
-      - Email service is unavailable to due to internal server error (Both SendGrid and MailGun are down)
+      - Email service is unavailable to due to internal server error (Both SendGrid and MailGun are down or any unrecoverable error occured)
 
 ### 3. Deployment
 
@@ -83,11 +84,11 @@ Sends email to given list of `to`, `cc` and `bcc` email IDs from the `from` emai
 - Ensure `JAVA_HOME` is set
 
 ##### 3.2 Instructions
-1. Checkout repository
+1. Clone repository
    `git clone <REPOSITORY_URL> .`
 
 2. Navigate to the project location and build the project
-   `cd PROJECT_ROOT_DIR`
+   `cd emailservice`
    `./gradlew bootJar`
 
 3. Set the following environment variables required for the application to run.
@@ -97,7 +98,7 @@ Sends email to given list of `to`, `cc` and `bcc` email IDs from the `from` emai
 
 4. Execute the jar
    Assuming you are in the project root directory
-   `java -jar build/libs/emailservice-0.0.1-SNAPSHOT.jar`
+   `java -jar build/libs/GENERATED_JAR.jar`
 
 ### 4. Demo
 The application is currently deployed in an AWS BeanStalk environment. The application can be accessed via `emailservice-env.xb3bpqkjp8.ap-southeast-2.elasticbeanstalk.com` Please refer to the API Documentation section for more information. 
